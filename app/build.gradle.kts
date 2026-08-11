@@ -137,3 +137,12 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
     debugImplementation(libs.ui.tooling)
 }
+
+// CVE-2024-7254: protobuf-javalite 3.21.8 (transitive of androidx.datastore
+// preferences-external-protobuf) has no fix in the 3.21.x line. Force the
+// patched 3.25.x line (binary-compatible within protobuf 3.x).
+configurations.all {
+    resolutionStrategy {
+        force("com.google.protobuf:protobuf-javalite:3.25.5")
+    }
+}

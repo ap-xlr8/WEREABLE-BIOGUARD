@@ -8,5 +8,14 @@ plugins {
     alias(libs.plugins.kotlinSerialization) apply false
 }
 
+// Scan only what ships in the APK. Test/tooling classpaths
+// (Robolectric, AGP UTP, lint) pull netty/grpc/bouncycastle and
+// produce false positives in the DevSecOps vulnerability scan.
+subprojects {
+    tasks.withType<org.cyclonedx.gradle.CyclonedxDirectTask>().configureEach {
+        includeConfigs = listOf("releaseRuntimeClasspath")
+    }
+}
+
 group = "com.bioguard"
 version = "1.0.0"
