@@ -153,7 +153,7 @@ class WearableAlertNotifier(private val context: Context) {
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setOngoing(true)
             .setAutoCancel(false)
-            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
             .build()
 
         try {

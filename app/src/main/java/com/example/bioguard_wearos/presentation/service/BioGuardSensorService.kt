@@ -16,6 +16,7 @@ import android.os.PowerManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.example.bioguard_wearos.BuildConfig
 import com.example.bioguard_wearos.R
 import com.example.bioguard_wearos.data.local.BioGuardPreferences
 import com.example.bioguard_wearos.data.local.db.BiometricReadingEntity
@@ -204,7 +205,9 @@ class BioGuardSensorService : Service(), MessageClient.OnMessageReceivedListener
                     if (estatura > 0f) {
                         val estaturaM = estatura / 100f
                         cachedBmi = peso / (estaturaM * estaturaM)
-                        Log.d(TAG, "BMI del paciente: $cachedBmi (peso=$peso, estatura=$estatura)")
+                        if (BuildConfig.DEBUG) {
+                            Log.d(TAG, "BMI del paciente: $cachedBmi (peso=$peso, estatura=$estatura)")
+                        }
                     }
                 }.onFailure {
                     Log.w(TAG, "No se pudo obtener perfil del paciente, usando BMI default=$DEFAULT_BMI")

@@ -121,7 +121,7 @@ class PeriodicSaveSQLiteTest {
         val sensorData = MutableStateFlow(
             SensorData(bpm = 75f, temperature = 36.4f, gsr = 22f)
         )
-        val scheduler = TelemetrySaveScheduler(repository, sensorData)
+        val scheduler = TelemetrySaveScheduler(repository, sensorData, intervalMs = 10_000L)
         val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
         scheduler.start(scope)
@@ -153,7 +153,7 @@ class PeriodicSaveSQLiteTest {
     @Test
     fun `scheduler does not save when bpm is zero`() = runBlocking {
         val sensorData = MutableStateFlow(SensorData(bpm = 0f))
-        val scheduler = TelemetrySaveScheduler(repository, sensorData)
+        val scheduler = TelemetrySaveScheduler(repository, sensorData, intervalMs = 10_000L)
         val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
         scheduler.start(scope)
@@ -169,7 +169,7 @@ class PeriodicSaveSQLiteTest {
         val sensorData = MutableStateFlow(
             SensorData(bpm = 80f, temperature = 36.5f, gsr = 25f)
         )
-        val scheduler = TelemetrySaveScheduler(repository, sensorData)
+        val scheduler = TelemetrySaveScheduler(repository, sensorData, intervalMs = 10_000L)
         val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
         scheduler.start(scope)

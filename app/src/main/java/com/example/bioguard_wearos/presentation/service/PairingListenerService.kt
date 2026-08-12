@@ -32,9 +32,8 @@ class PairingListenerService : WearableListenerService() {
                 val preferences = BioGuardPreferences(applicationContext)
                 val trustedNodeId = preferences.getTrustedMobileNodeId()
                 if (trustedNodeId != event.sourceNodeId) {
-                    if (nonce.isNotBlank() && !nonce.startsWith("auto-pair")) {
-                        preferences.consumePairingChallenge(nonce)
-                    }
+                    require(nonce.isNotBlank()) { "Missing pairing challenge nonce" }
+                    preferences.consumePairingChallenge(nonce)
                 }
                 preferences.saveTrustedMobileNodeId(event.sourceNodeId)
                 val ack = JSONObject()

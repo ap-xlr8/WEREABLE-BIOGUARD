@@ -125,7 +125,7 @@ Sensor PPG → SensorDataRepositoryImpl._sensorData (StateFlow)
 
 ## Capa de Red — 11 Endpoints REST
 
-**Base URL:** `https://bioguard-api-lkvnq.ondigitalocean.app`
+**Base URL:** `https://api.bioguard.example.com`
 
 ### Fase 1 — Setup y Vinculación
 

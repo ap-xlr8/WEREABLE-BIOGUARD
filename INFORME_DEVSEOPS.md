@@ -87,14 +87,14 @@
 
 ---
 
-## 6. Priorización
+## 6. Estado de Remedición
 
-| # | Severidad | Acción |
-|---|---|---|
-| 1 | Media | Envolver logs de datos biométricos/PII en `BuildConfig.DEBUG` (o eliminarlos) |
-| 2 | Media | Actualizar Guava (31.1→34.x), zxing (3.6.0), kotlinx-coroutines (1.10.x) |
-| 3 | Baja | Evaluar el bypass `auto-pair` (validación de nonce) en `PairingListenerService.kt:35` |
-| 4 | Baja | Declarar `READ_BODY_TEMPERATURE` en el manifest o quitar la solicitud |
-| 5 | Baja | Notificación "AYUDA SOLICITADA": considerar `VISIBILITY_PRIVATE` |
-| 6 | Baja | Añadir Dependabot; no versionar `.idea/` |
-| 7 | Info | Verificar que el repo sea privado; evaluar cifrado a nivel de app del Data Layer si se considera necesario |
+| # | Severidad | Acción | Estado |
+|---|---|---|---|
+| 1 | Media | Envolver logs de datos biométricos/PII en `BuildConfig.DEBUG` | ✅ RESUELTO (`SensorDataRepositoryImpl`, `BioGuardSensorService`, `BioGuardPassiveListenerService`) |
+| 2 | Media | Eliminar bypass `auto-pair` (validación de nonce) en `PairingListenerService.kt` | ✅ RESUELTO (Reto obligatorio `consumePairingChallenge`) |
+| 3 | Baja | Declarar `READ_BODY_TEMPERATURE` en el manifest | ✅ RESUELTO (`AndroidManifest.xml`) |
+| 4 | Baja | Notificación "AYUDA SOLICITADA": configurar `VISIBILITY_PRIVATE` | ✅ RESUELTO (`WearableAlertNotifier.kt`) |
+| 5 | Baja | Añadir Dependabot | ✅ RESUELTO (`.github/dependabot.yml`) |
+| 6 | Info | Sanitización de URL en documentación (`CONTEXT_APP.md`) | ✅ RESUELTO (`api.bioguard.example.com`) |
+

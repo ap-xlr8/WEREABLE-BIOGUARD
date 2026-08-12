@@ -1,6 +1,7 @@
 package com.example.bioguard_wearos.data.repository
 
 import android.content.Context
+import com.example.bioguard_wearos.BuildConfig
 import android.content.pm.PackageManager
 import android.os.Build
 import android.hardware.Sensor
@@ -126,7 +127,9 @@ class SensorDataRepositoryImpl(
                         heartRateOffBody = false,
                         statusMessage = null
                     )
-                    Log.d("BIOGUARD", "Health Services BPM: $bpm")
+                    if (BuildConfig.DEBUG) {
+                        Log.d("BIOGUARD", "Health Services BPM: $bpm")
+                    }
                 }
             }
         }
@@ -408,7 +411,9 @@ class SensorDataRepositoryImpl(
                             heartRateOffBody = false,
                             statusMessage = null
                         )
-                        Log.d("BIOGUARD", "SensorManager BPM: $bpm (accuracy=${event.accuracy})")
+                        if (BuildConfig.DEBUG) {
+                            Log.d("BIOGUARD", "SensorManager BPM: $bpm (accuracy=${event.accuracy})")
+                        }
                     }
                 }
             }

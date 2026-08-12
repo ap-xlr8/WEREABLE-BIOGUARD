@@ -1,6 +1,7 @@
 package com.example.bioguard_wearos.data.sensor
 
 import android.util.Log
+import com.example.bioguard_wearos.BuildConfig
 import androidx.health.services.client.PassiveListenerService
 import androidx.health.services.client.data.DataPointContainer
 import androidx.health.services.client.data.DataType
@@ -33,7 +34,9 @@ class BioGuardPassiveListenerService : PassiveListenerService() {
             for (dataPoint in heartRateData) {
                 val bpm = dataPoint.value.toFloat()
                 if (bpm > 0f) {
-                    Log.d(TAG, "Lectura de pulso pasiva recibida: $bpm BPM")
+                    if (BuildConfig.DEBUG) {
+                        Log.d(TAG, "Lectura de pulso pasiva recibida: $bpm BPM")
+                    }
                 }
             }
         }

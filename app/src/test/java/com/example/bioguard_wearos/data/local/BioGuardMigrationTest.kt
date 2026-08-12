@@ -28,7 +28,8 @@ class BioGuardMigrationTest {
             execSQL(
                 "CREATE TABLE outbound_messages (" +
                     "id TEXT NOT NULL PRIMARY KEY, path TEXT NOT NULL, payloadJson TEXT NOT NULL, " +
-                    "priority INTEGER NOT NULL, createdAt INTEGER NOT NULL, attempts INTEGER NOT NULL)"
+                    "priority INTEGER NOT NULL, createdAt INTEGER NOT NULL, attempts INTEGER NOT NULL, " +
+                    "source_message_id TEXT NOT NULL DEFAULT '')"
             )
             execSQL(
                 "INSERT INTO biometric_readings " +
@@ -40,7 +41,7 @@ class BioGuardMigrationTest {
         }
 
         val migrated = Room.databaseBuilder(context, BioGuardDatabase::class.java, dbName)
-            .addMigrations(BioGuardDatabase.MIGRATION_2_3)
+            .addMigrations(BioGuardDatabase.MIGRATION_1_2, BioGuardDatabase.MIGRATION_2_3)
             .allowMainThreadQueries()
             .build()
         migrated.openHelper.writableDatabase
