@@ -62,6 +62,10 @@ jobs:
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -98,6 +102,13 @@ jobs:
           test -n "$APK_PATH"
           "$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)/apksigner" verify --verbose --print-certs "$APK_PATH"
           (cd "$(dirname "$APK_PATH")" && sha256sum "$(basename "$APK_PATH")" > SHA256SUMS.txt)
+
+      - name: Generate build provenance attestation
+        uses: actions/attest-build-provenance@c074443f1a5f4a21e196658064a3d463e264627d # v2.2.3
+        with:
+          subject-path: |
+            app/build/outputs/apk/release/*.apk
+            app/build/outputs/bundle/release/*.aab
 
       - name: Upload signed APK
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
