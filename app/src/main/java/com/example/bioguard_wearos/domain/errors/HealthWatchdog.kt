@@ -1,6 +1,7 @@
 package com.example.bioguard_wearos.domain.errors
 
 import android.util.Log
+import com.example.bioguard_wearos.BuildConfig
 import com.example.bioguard_wearos.domain.repository.BiometricReadingRepository
 import com.example.bioguard_wearos.domain.repository.SensorDataRepository
 import kotlinx.coroutines.CoroutineScope
@@ -72,7 +73,9 @@ class HealthWatchdog @Inject constructor(
                 Log.e(TAG, "Error durante reinicio preventivo de sensores: ${e.message}", e)
             }
         } else {
-            Log.d(TAG, "Chequeo de sensores OK (BPM=${currentData.bpm}, Temp=${currentData.temperature})")
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Chequeo de sensores OK (BPM=${currentData.bpm}, Temp=${currentData.temperature})")
+            }
         }
     }
 

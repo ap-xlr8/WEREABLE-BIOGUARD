@@ -1,6 +1,7 @@
 package com.example.bioguard_wearos.presentation.screens.dashboard
 
 import android.util.Log
+import com.example.bioguard_wearos.BuildConfig
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bioguard_wearos.data.local.BioGuardPreferences
@@ -60,7 +61,9 @@ class DashboardViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             sensorDataRepository.sensorData.collect { data ->
-                Log.d(TAG, "SensorData recibido: BPM=${data.bpm}, Temp=${data.temperature}, GSR=${data.gsr}")
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "SensorData recibido: BPM=${data.bpm}, Temp=${data.temperature}, GSR=${data.gsr}")
+                }
                 _uiState.update { it.copy(sensorData = data) }
             }
         }

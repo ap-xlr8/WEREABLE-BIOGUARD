@@ -361,7 +361,9 @@ class SensorDataRepositoryImpl(
             }
         } ?: run {
             Log.e("BIOGUARD", "Sensor TYPE_HEART_RATE NO EXISTE en este dispositivo")
-            Log.e("BIOGUARD", "Sensores disponibles: ${sensorManager?.getSensorList(Sensor.TYPE_ALL)?.map { "${it.name}(${it.type})" }?.joinToString()}")
+            if (BuildConfig.DEBUG) {
+                Log.e("BIOGUARD", "Sensores disponibles: ${sensorManager?.getSensorList(Sensor.TYPE_ALL)?.map { "${it.name}(${it.type})" }?.joinToString()}")
+            }
         }
     }
 

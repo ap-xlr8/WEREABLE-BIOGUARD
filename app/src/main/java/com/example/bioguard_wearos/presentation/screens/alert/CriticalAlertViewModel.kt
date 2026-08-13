@@ -2,6 +2,7 @@ package com.example.bioguard_wearos.presentation.screens.alert
 
 import android.content.Context
 import android.util.Log
+import com.example.bioguard_wearos.BuildConfig
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -62,9 +63,11 @@ class CriticalAlertViewModel @Inject constructor(
     }
 
     private fun onCriticalAlertTriggered(state: AlertState) {
-        Log.w(TAG, "ALERTA CRÍTICA: BPM=${state.assessment.input.bpm}, " +
-                "Temp=${state.assessment.input.temperature}, GSR=${state.assessment.input.gsr}, " +
-                "P(Pico)=${String.format("%.3f", state.assessment.probability)}")
+        if (BuildConfig.DEBUG) {
+            Log.w(TAG, "ALERTA CRÍTICA: BPM=${state.assessment.input.bpm}, " +
+                    "Temp=${state.assessment.input.temperature}, GSR=${state.assessment.input.gsr}, " +
+                    "P(Pico)=${String.format("%.3f", state.assessment.probability)}")
+        }
 
         _uiState.update {
             it.copy(

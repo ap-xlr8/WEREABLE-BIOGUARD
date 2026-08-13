@@ -125,7 +125,11 @@ Sensor PPG → SensorDataRepositoryImpl._sensorData (StateFlow)
 
 ## Capa de Red — 11 Endpoints REST
 
-**Base URL:** `https://api.bioguard.example.com`
+> **NOTA DE ARQUITECTURA DE SEGURIDAD (Zero-Network Surface):**
+> La aplicación Wear OS en el smartwatch **NO consume directamente estos endpoints REST** ni realiza conexiones HTTP hacia Internet.
+> La transmisión de la telemetría se realiza localmente a través de **Wear OS Data Layer API** hacia la app móvil del smartphone, la cual se encarga de autenticar y consumir esta API REST.
+
+**Base URL (Móvil):** `https://api.bioguard.example.com`
 
 ### Fase 1 — Setup y Vinculación
 
