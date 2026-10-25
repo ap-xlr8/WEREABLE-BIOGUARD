@@ -143,6 +143,6 @@ dependencies {
 // patched 3.25.x line (binary-compatible within protobuf 3.x).
 configurations.all {
     resolutionStrategy {
-        force("com.google.protobuf:protobuf-javalite:3.25.5")
+        force("com.google.protobuf:protobuf-javalite:4.35.1")
     }
 }
